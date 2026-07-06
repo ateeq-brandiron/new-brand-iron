@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/Container";
 import { EmptyState } from "@/components/ui/EmptyState";
 import {
   resourceSections,
-  getResourceSection,
   getResourceSubsection,
 } from "@/lib/resources-data";
 

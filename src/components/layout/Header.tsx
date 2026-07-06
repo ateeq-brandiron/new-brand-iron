@@ -55,6 +55,12 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
+          <Link
+            href="/portal"
+            className="text-sm font-semibold text-iron-body hover:text-iron-orange"
+          >
+            Client Portal
+          </Link>
           <a
             href={siteConfig.phoneHref}
             className="flex items-center gap-2 text-sm font-bold text-iron-black hover:text-iron-orange"
@@ -102,6 +108,13 @@ export function Header() {
                 ) : null}
               </div>
             ))}
+            <Link
+              href="/portal"
+              className="block rounded-md px-2 py-2 font-semibold text-iron-body"
+              onClick={() => setMobileOpen(false)}
+            >
+              Client Portal
+            </Link>
             <ButtonLink href="/contact" className="mt-3">
               Book a Call
             </ButtonLink>
