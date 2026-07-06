@@ -26,7 +26,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group flex flex-col rounded-2xl border border-iron-line p-6 transition-colors hover:border-iron-orange"
+              className="group flex flex-col border-t-4 border-iron-black bg-white p-6 transition-colors hover:border-iron-orange"
             >
               <span className="text-xs font-bold uppercase tracking-wide text-iron-orange">
                 {post.category}

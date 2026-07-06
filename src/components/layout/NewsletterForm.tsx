@@ -33,13 +33,13 @@ export function NewsletterForm() {
         type="email"
         required
         placeholder="Email"
-        className="w-full rounded-full border border-white/20 bg-transparent px-4 py-2.5 text-sm text-white placeholder:text-white/40 outline-none focus:border-iron-orange"
+        className="w-full border border-white/40 bg-transparent px-4 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-iron-black"
       />
       <button
         type="submit"
         disabled={status === "loading"}
         aria-label="Subscribe"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-iron-orange text-white hover:bg-iron-orange-dark"
+        className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-white text-white hover:bg-white hover:text-iron-mauve"
       >
         <ArrowRight className="h-4 w-4" />
       </button>

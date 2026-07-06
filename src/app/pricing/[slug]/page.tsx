@@ -67,7 +67,7 @@ export default async function PricingPackagePage({
               service page for more detail.
             </p>
           </div>
-          <div className="rounded-3xl border border-iron-line p-6">
+          <div className="border-t-4 border-iron-black p-6">
             <h2 className="text-lg font-bold text-iron-black">
               Request pricing
             </h2>

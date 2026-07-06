@@ -66,7 +66,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section className="bg-iron-mist">
+      <Section className="bg-iron-offwhite">
         <Container>
           <h2 className="text-2xl font-bold text-iron-black">
             More about how we operate

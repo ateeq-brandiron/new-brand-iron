@@ -66,7 +66,7 @@ export default async function IndustryPage({
         </Container>
       </Section>
 
-      <Section className="bg-iron-mist pt-0">
+      <Section className="bg-iron-offwhite pt-0">
         <Container>
           <h2 className="text-2xl font-bold text-iron-black">
             Related services

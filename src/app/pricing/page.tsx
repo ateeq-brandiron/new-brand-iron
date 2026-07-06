@@ -28,9 +28,9 @@ export default function PricingPage() {
           {pricingPackages.map((pkg) => (
             <div
               key={pkg.slug}
-              className="flex flex-col rounded-3xl border border-iron-line p-8"
+              className="flex flex-col border-t-4 border-iron-black p-8"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-iron-mist text-iron-orange">
+              <div className="flex h-12 w-12 items-center justify-center bg-iron-offwhite text-iron-orange">
                 <pkg.icon className="h-6 w-6" strokeWidth={1.5} />
               </div>
               <h2 className="mt-4 text-xl font-bold text-iron-black">

@@ -52,7 +52,7 @@ export default async function AboutSubPage({
             {page.highlights.map((highlight) => (
               <div
                 key={highlight.title}
-                className="rounded-2xl border border-iron-line p-6"
+                className="border-t-4 border-iron-black p-6"
               >
                 <p className="font-bold text-iron-orange">
                   {highlight.title}

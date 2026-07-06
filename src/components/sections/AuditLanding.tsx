@@ -26,7 +26,7 @@ export function AuditLanding({ audit }: { audit: AuditPage }) {
             <p className="mt-6 text-sm text-white/50">{audit.whoItsFor}</p>
           </div>
 
-          <div className="rounded-3xl bg-white p-8 text-iron-black">
+          <div className="bg-white p-8 text-iron-black">
             <h2 className="text-lg font-bold">Get your free {audit.title}</h2>
             <ul className="mt-4 space-y-2.5">
               {audit.whatYouGet.map((item) => (

@@ -30,7 +30,7 @@ export function Header() {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-iron-black hover:text-iron-orange"
+                  className="flex items-center gap-1 px-3 py-2 text-sm font-bold uppercase tracking-wide text-iron-black hover:text-iron-orange"
                 >
                   {item.label}
                   {item.children ? (
@@ -38,12 +38,12 @@ export function Header() {
                   ) : null}
                 </Link>
                 {item.children && openDropdown === item.label ? (
-                  <div className="absolute left-0 top-full w-72 rounded-xl border border-iron-line bg-white p-2 shadow-xl">
+                  <div className="absolute left-0 top-full w-72 border border-iron-line bg-white p-2 shadow-xl">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-lg px-4 py-2.5 text-sm font-medium text-iron-black hover:bg-iron-mist hover:text-iron-orange"
+                        className="block px-4 py-2.5 text-sm font-medium text-iron-black hover:bg-iron-offwhite hover:text-iron-orange"
                       >
                         {child.label}
                       </Link>

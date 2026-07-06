@@ -28,9 +28,9 @@ export default function ServicesPage() {
           {servicePillars.map((pillar) => (
             <div
               key={pillar.slug}
-              className="grid gap-6 rounded-3xl border border-iron-line p-8 md:grid-cols-[auto_1fr_auto] md:items-center"
+              className="grid gap-6 border-t-4 border-iron-black p-8 md:grid-cols-[auto_1fr_auto] md:items-center"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-iron-mist text-iron-orange">
+              <div className="flex h-14 w-14 items-center justify-center bg-iron-offwhite text-iron-orange">
                 <pillar.icon className="h-7 w-7" strokeWidth={1.5} />
               </div>
               <div>

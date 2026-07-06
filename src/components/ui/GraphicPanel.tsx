@@ -17,13 +17,15 @@ export function GraphicPanel({
   className?: string;
   tone?: "orange" | "black";
 }) {
+  const tones = {
+    orange: "bg-gradient-to-br from-iron-orange to-iron-orange-dark",
+    black: "bg-gradient-to-br from-iron-black to-neutral-800",
+  };
   return (
     <div
       className={clsx(
-        "relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-3xl",
-        tone === "orange"
-          ? "bg-gradient-to-br from-iron-orange to-iron-orange-dark"
-          : "bg-gradient-to-br from-iron-black to-neutral-800",
+        "relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden",
+        tones[tone],
         className
       )}
     >

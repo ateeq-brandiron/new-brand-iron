@@ -73,7 +73,7 @@ export default async function ServiceItemPage({
       </Section>
 
       {item.planOptions ? (
-        <Section className="bg-iron-mist pt-0">
+        <Section className="bg-iron-offwhite pt-0">
           <Container>
             <h2 className="text-2xl font-bold text-iron-black">
               Choose your pace
@@ -82,7 +82,7 @@ export default async function ServiceItemPage({
               {item.planOptions.map((plan) => (
                 <div
                   key={plan.name}
-                  className="rounded-2xl border border-iron-line bg-white p-6"
+                  className="border-t-4 border-iron-black bg-white p-6"
                 >
                   <p className="text-sm font-bold uppercase tracking-wide text-iron-orange">
                     {plan.name}

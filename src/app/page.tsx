@@ -1,10 +1,6 @@
 import {
-  Award,
-  DollarSign,
   FileText,
-  Flame,
   LayoutGrid,
-  MessageSquare,
   MonitorSmartphone,
   Palette,
   Presentation,
@@ -14,7 +10,6 @@ import {
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Section, Eyebrow } from "@/components/ui/Section";
 import { GraphicPanel } from "@/components/ui/GraphicPanel";
 
 const stats = [
@@ -23,7 +18,7 @@ const stats = [
   { value: "500+", suffix: " Pitch Decks", label: "Created" },
 ];
 
-const process = [
+const processRow1 = [
   {
     title: "Define",
     body: "what makes your business, idea, or investment opportunity unique, what your goals are, and how you measure success. Our BrandStorm™ strategic planning session goes beyond the investment opportunity to lay the foundation for all future marketing efforts.",
@@ -32,6 +27,9 @@ const process = [
     title: "Discover",
     body: "your unique brand—we explore your key differentiators, value points, and your value proposition, then craft your unique brand story that sells and produces results. Plus, we align you with the right tech to get it all done, from CRM to marketing automation and how we track your success.",
   },
+];
+
+const processRow2 = [
   {
     title: "Develop",
     body: "your messaging and marketing to engage your partners and general business community with our Messaging Platform, logo design, pitch deck, website strategy, and Go To Market plan. We ensure you have everything you need to successfully reach your target market.",
@@ -39,10 +37,6 @@ const process = [
   {
     title: "Deploy",
     body: "your unique plan with our Go To Market Strategy, outbound investor campaigns, social media, digital campaigns (paid and organic), capital raise decks and lead generation activities, brand & website development.",
-  },
-  {
-    title: "Determine",
-    body: "the next steps toward your profitable outcome handled entirely by our Business Development team or in tandem with your account manager, digital manager, creative or content team. We utilize tech tools to measure how you are doing in achieving your stated goals and objectives, and how your marketing is producing results to maximize your investment.",
   },
 ];
 
@@ -62,14 +56,13 @@ const quickServices = [
   { title: "All Services", href: "/services", icon: LayoutGrid },
 ];
 
-const expertiseGrid = [
-  { title: "Define & Develop Your Brand", icon: Target },
-  { title: "Build & Deploy Your Marketing Strategy", icon: Rocket },
-  { title: "Create Your Pitch Deck", icon: Presentation },
-  { title: "Craft Your Message", icon: MessageSquare },
-  { title: "Design Your Website", icon: MonitorSmartphone },
-  { title: "Secure Your Funding", icon: DollarSign },
-  { title: "Maximize Your Results", icon: Award },
+const expertiseItems = [
+  { bold: "Define", rest: "And Develop Your Brand" },
+  { bold: "Craft", rest: "Your Message" },
+  { bold: "Build", rest: "And Deploy Your Marketing Strategy" },
+  { bold: "Design", rest: "Your Website" },
+  { bold: "Create", rest: "Your Pitch Deck" },
+  { bold: "Secure", rest: "Your Funding" },
 ];
 
 const forgeColumns = [
@@ -140,32 +133,95 @@ const raiseSteps = [
   {
     title: "Customize Pitch Deck",
     body: "We work with you to ensure all design aligns with your brand, all financials are investor-ready, and all content speaks to your unique value proposition.",
+    bg: "bg-iron-panel-dark",
+    text: "text-white",
+    sub: "text-white/70",
   },
   {
     title: "Raise Capital",
     body: "We help you create the offer, get you ready for investment pitches, help you get in front of your target personas, and help you execute your raise.",
+    bg: "bg-iron-panel-mid",
+    text: "text-white",
+    sub: "text-white/70",
   },
   {
     title: "Build GTM Plan",
     body: "We develop a full build-out for your capital spend, bringing transparency to investors and preparing you for capital deployment.",
+    bg: "bg-iron-panel-light",
+    text: "text-iron-black",
+    sub: "text-iron-black/70",
   },
   {
     title: "Deploy Capital",
     body: "We help you track spending, to ensure you have the best data-driven decisions that get your projects moving on-time and on-budget.",
+    bg: "bg-iron-panel-pale",
+    text: "text-iron-black",
+    sub: "text-iron-black/70",
   },
 ];
+
+function WatermarkHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="balance text-center text-4xl font-bold uppercase leading-tight text-iron-black/10 md:text-6xl">
+      {children}
+    </h2>
+  );
+}
+
+function ExpertiseItem({
+  bold,
+  rest,
+  align,
+}: {
+  bold: string;
+  rest: string;
+  align: "left" | "right";
+}) {
+  return (
+    <div className={align === "right" ? "md:text-right" : ""}>
+      <p className="text-xl font-bold text-iron-black md:text-2xl">
+        {bold} <span className="font-normal">{rest}</span>
+      </p>
+      <div
+        className={`mt-2 flex items-stretch gap-2 ${
+          align === "right" ? "flex-row-reverse" : ""
+        }`}
+      >
+        <span className="text-2xl font-bold leading-none text-iron-orange">
+          {align === "right" ? "]" : "["}
+        </span>
+        <div className="flex-1 space-y-1">
+          <div className="h-0.5 w-full bg-iron-orange" />
+          <div className="h-0.5 w-full bg-iron-orange" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <>
+      {/* Watermark tagline */}
+      <div className="overflow-hidden pt-16">
+        <Container>
+          <p className="balance text-center text-4xl font-bold uppercase leading-none text-iron-black/10 md:text-7xl">
+            Outlaws of Ordinary
+          </p>
+          <p className="mt-2 text-center text-sm font-bold uppercase tracking-[0.3em] text-iron-black/20">
+            Forging Unique Brands in Unique Ways
+          </p>
+        </Container>
+      </div>
+
       {/* Hero */}
-      <Section className="overflow-hidden pb-12 pt-16 md:pt-20">
-        <Container className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <h3 className="text-lg font-semibold text-iron-orange">
+      <div className="py-12 md:py-16">
+        <Container>
+          <div className="ml-auto max-w-2xl">
+            <h3 className="text-lg font-bold uppercase text-iron-black">
               In the Wild West of marketing,
             </h3>
-            <h1 className="balance mt-2 text-5xl font-light leading-[1.05] text-iron-black md:text-6xl">
+            <h1 className="balance mt-2 text-5xl font-bold uppercase leading-[1.05] text-iron-black md:text-6xl">
               Make your mark on the world
             </h1>
             <p className="mt-6 max-w-lg text-lg text-iron-body">
@@ -174,7 +230,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <ButtonLink href="/contact">Book a Strategy Call</ButtonLink>
-              <ButtonLink href="/case-studies" variant="outline">
+              <ButtonLink href="/case-studies" variant="link">
                 See Our Work
               </ButtonLink>
             </div>
@@ -183,79 +239,107 @@ export default function Home() {
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-3xl font-black text-iron-black md:text-4xl">
+                  <dd className="text-2xl font-bold text-iron-black md:text-3xl">
                     {stat.value}
                     <span className="text-iron-orange">{stat.suffix}</span>
                   </dd>
-                  <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-iron-body">
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-iron-body">
                     {stat.label}
                   </p>
                 </div>
               ))}
             </dl>
           </div>
+        </Container>
+      </div>
 
-          <div className="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center">
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-iron-orange to-iron-orange-dark">
-              <Flame className="h-1/3 w-1/3 text-white" strokeWidth={1} />
+      {/* Process: zigzag rows */}
+      <div className="py-16 md:py-24">
+        <Container className="space-y-16 md:space-y-24">
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div className="space-y-10">
+              {processRow1.map((step) => (
+                <div key={step.title}>
+                  <h3 className="text-3xl font-bold uppercase text-iron-black">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-iron-body">{step.body}</p>
+                </div>
+              ))}
+            </div>
+            <GraphicPanel icon={Target} label="Brand Discovery" />
+          </div>
+
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div className="order-2 md:order-1">
+              <GraphicPanel icon={Rocket} label="Go-To-Market Deployment" />
+            </div>
+            <div className="order-1 space-y-10 md:order-2">
+              {processRow2.map((step) => (
+                <div key={step.title}>
+                  <h3 className="text-3xl font-bold uppercase text-iron-black">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-iron-body">{step.body}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </Container>
-      </Section>
 
-      {/* Define / Discover / Develop / Deploy / Determine */}
-      <Section className="bg-iron-mist py-14 md:py-16">
-        <Container>
-          <div className="grid gap-8 md:grid-cols-5">
-            {process.map((step, i) => (
-              <div key={step.title} className="relative">
-                <span className="text-sm font-black text-iron-orange">
-                  0{i + 1}
-                </span>
-                <h3 className="mt-2 text-xl font-bold text-iron-black">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-iron-body">
-                  {step.body}
-                </p>
-              </div>
-            ))}
+          <div className="max-w-3xl">
+            <h3 className="text-3xl font-bold uppercase text-iron-black">
+              Determine
+            </h3>
+            <p className="mt-3 text-iron-body">
+              the next steps toward your profitable outcome handled entirely
+              by our Business Development team or in tandem with your account
+              manager, digital manager, creative or content team. We utilize
+              tech tools to measure how you are doing in achieving your
+              stated goals and objectives, and how your marketing is
+              producing results to maximize your investment.
+            </p>
           </div>
         </Container>
-      </Section>
+      </div>
 
-      {/* Quick service icons */}
-      <Section className="py-14 md:py-16">
+      {/* Quick service links */}
+      <div className="border-y border-iron-line py-14">
         <Container>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
             {quickServices.map((service) => (
               <a
                 key={service.title}
                 href={service.href}
-                className="group flex flex-col items-center gap-4 rounded-2xl border border-iron-line p-6 text-center transition-colors hover:border-iron-orange"
+                className="group flex flex-col items-center gap-3 text-center"
               >
                 <service.icon
-                  className="h-10 w-10 text-iron-orange"
+                  className="h-9 w-9 text-iron-black group-hover:text-iron-orange"
                   strokeWidth={1.5}
                 />
-                <span className="text-sm font-bold text-iron-black group-hover:text-iron-orange">
+                <span className="text-sm font-bold uppercase tracking-wide text-iron-orange">
                   {service.title}
                 </span>
               </a>
             ))}
           </div>
         </Container>
-      </Section>
+      </div>
 
       {/* Brand Iron gets you there / competition */}
-      <Section className="bg-iron-black py-20 text-white">
+      <div className="py-20 md:py-28">
         <Container>
-          <div className="max-w-3xl">
-            <Eyebrow>Brand Iron gets you there.</Eyebrow>
-            <h2 className="balance text-3xl font-light md:text-4xl">
-              With our experts on your team, YOU&rsquo;RE the competition.
-            </h2>
-            <p className="mt-5 text-white/70">
+          <h2 className="balance mx-auto max-w-4xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+            Brand Iron gets you there.
+          </h2>
+
+          <div className="mt-16 max-w-2xl">
+            <p className="text-lg font-semibold text-iron-black">
+              With our experts on your team,
+            </p>
+            <h3 className="mt-1 text-3xl font-bold uppercase text-iron-black md:text-4xl">
+              You&rsquo;re the competition.
+            </h3>
+            <p className="mt-5 text-iron-body">
               Branding requires the right elements for success. Our proven
               brand-building, messaging methodology, and marketing
               implementation ensures your business achieves your goals and
@@ -264,50 +348,57 @@ export default function Home() {
               full-time marketing team.
             </p>
           </div>
+        </Container>
+      </div>
 
-          <h3 className="mt-14 text-sm font-bold uppercase tracking-[0.2em] text-iron-orange">
+      {/* Use Brand Iron's expertise to */}
+      <div className="py-16 md:py-24">
+        <Container>
+          <h2 className="balance mx-auto max-w-3xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
             Use Brand Iron&rsquo;s expertise to:
-          </h3>
-          <div className="mt-6 grid grid-cols-2 gap-6 md:grid-cols-4">
-            {expertiseGrid.map((item) => (
-              <div
-                key={item.title}
-                className="flex flex-col items-start gap-4 rounded-2xl border border-white/10 p-6"
-              >
-                <item.icon className="h-8 w-8 text-iron-orange" strokeWidth={1.5} />
-                <span className="text-sm font-bold">{item.title}</span>
+          </h2>
+
+          <div className="mt-20 grid gap-x-12 gap-y-16 md:grid-cols-2">
+            {expertiseItems.map((item, i) => (
+              <div key={item.bold} className={i % 2 === 1 ? "md:mt-16" : ""}>
+                <ExpertiseItem
+                  bold={item.bold}
+                  rest={item.rest}
+                  align={i % 2 === 1 ? "right" : "left"}
+                />
               </div>
             ))}
           </div>
+
+          <p className="mt-16 text-center text-2xl font-bold text-iron-black">
+            Maximize <span className="font-normal">Your Results</span>
+          </p>
         </Container>
-      </Section>
+      </div>
 
       {/* Forge your next phase */}
-      <Section>
+      <div className="bg-iron-tan py-20 md:py-28">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="balance text-3xl font-light text-iron-black md:text-4xl">
-              Forge your next phase of success with Brand Iron
-            </h2>
-          </div>
+          <h2 className="balance mx-auto max-w-4xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+            Forge your next phase of success with Brand Iron
+          </h2>
 
-          <div className="mt-14 grid gap-10 lg:grid-cols-2">
+          <div className="mt-16 grid gap-8 lg:grid-cols-2">
             {forgeColumns.map((col) => (
-              <div
-                key={col.title}
-                className="rounded-3xl border border-iron-line p-8 md:p-10"
-              >
-                <h3 className="text-2xl font-bold text-iron-orange">
+              <div key={col.title} className="bg-white p-8 md:p-10">
+                <h3 className="text-4xl font-bold uppercase text-iron-black">
                   {col.title}
                 </h3>
-                <p className="text-lg font-semibold text-iron-black">
+                <p className="mt-1 text-lg font-semibold text-iron-body">
                   {col.subtitle}
                 </p>
-                <p className="mt-3 text-iron-body">{col.body}</p>
+                <p className="mt-4 text-iron-body">{col.body}</p>
                 <ul className="mt-6 space-y-4">
                   {col.items.map((item) => (
                     <li key={item.name}>
-                      <p className="font-bold text-iron-black">{item.name}</p>
+                      <p className="font-bold uppercase text-iron-black">
+                        {item.name}
+                      </p>
                       <p className="mt-1 text-sm leading-relaxed text-iron-body">
                         {item.body}
                       </p>
@@ -318,24 +409,20 @@ export default function Home() {
             ))}
           </div>
         </Container>
-      </Section>
+      </div>
 
-      {/* If Grit & Gumption */}
-      <Section className="bg-iron-mist">
+      {/* If Grit & Gumption watermark divider + grit cards */}
+      <div className="bg-iron-tan pb-20 pt-4 md:pb-28">
         <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>Brand Iron</Eyebrow>
-            <h2 className="balance text-3xl font-light text-iron-black md:text-4xl">
-              If Grit &amp; Gumption Were a Branding Agency
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3 lg:grid-cols-5">
+          <WatermarkHeading>
+            If Grit &amp; Gumption Were a Branding Agency
+          </WatermarkHeading>
+          <div className="mt-16 grid gap-10 md:grid-cols-3 lg:grid-cols-5">
             {gritCards.map((card) => (
-              <div
-                key={card.title}
-                className="rounded-2xl bg-white p-6 shadow-sm"
-              >
-                <h3 className="font-bold text-iron-black">{card.title}</h3>
+              <div key={card.title}>
+                <h3 className="font-bold uppercase text-iron-black">
+                  {card.title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-iron-body">
                   {card.body}
                 </p>
@@ -343,97 +430,111 @@ export default function Home() {
             ))}
           </div>
         </Container>
-      </Section>
+      </div>
 
-      {/* Capital raise */}
-      <Section>
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="balance text-3xl font-light text-iron-black md:text-4xl">
-                We&rsquo;ve helped our clients raise over $5 Billion
-              </h2>
-              <p className="mt-2 text-iron-body">
-                — and we&rsquo;re confident we can help you raise capital,
-                too.
-              </p>
-              <h3 className="mt-8 text-xl font-bold text-iron-orange">
-                Secure Investor Funding
-              </h3>
-              <p className="mt-3 text-iron-body">
-                We capture investors&rsquo; attention so you can get the
-                funding your brand deserves with our proprietary Capital
-                Pitch Decks that have successfully secured over $5 billion for
-                our clients.
-              </p>
-              <ButtonLink href="/capital-raise-deck-audit" className="mt-6">
-                Let&rsquo;s promote your business next.
-              </ButtonLink>
-            </div>
-            <GraphicPanel icon={FileText} label="Capital Raise Deck" />
-          </div>
-
-          <div className="mt-16 grid gap-8 md:grid-cols-4">
-            {raiseSteps.map((step, i) => (
-              <div key={step.title}>
-                <span className="text-sm font-black text-iron-orange">
-                  0{i + 1}
-                </span>
-                <h4 className="mt-2 font-bold text-iron-black">
-                  {step.title}
-                </h4>
-                <p className="mt-2 text-sm leading-relaxed text-iron-body">
-                  {step.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Kicking Ass */}
-      <Section className="bg-iron-orange">
+      {/* Capital raise statement (still tan) */}
+      <div className="bg-iron-tan pb-20 pt-4 md:pb-28">
         <Container className="text-center">
-          <p className="text-lg font-semibold text-white/80">
-            We&rsquo;re In Your Back Pocket,
-          </p>
-          <h2 className="balance mx-auto mt-2 max-w-3xl text-3xl font-light text-white md:text-4xl">
-            But We&rsquo;re Kicking Typical Branding Agency Ass
+          <h2 className="balance mx-auto max-w-4xl text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+            We&rsquo;ve helped our clients raise over $5 Billion
           </h2>
-          <ButtonLink
-            href="/about"
-            variant="secondary"
-            className="mt-8 bg-white text-iron-black hover:bg-white/90"
-          >
-            Get To Know Us
+          <p className="mt-4 text-lg font-bold uppercase text-iron-black/70">
+            — and we&rsquo;re confident we can help you raise capital, too.
+          </p>
+        </Container>
+      </div>
+
+      {/* Secure Investor Funding */}
+      <div className="py-20 md:py-28">
+        <Container className="text-center">
+          <h2 className="text-4xl font-bold uppercase text-iron-black md:text-6xl">
+            Secure Investor Funding
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-iron-body">
+            We capture investors&rsquo; attention so you can get the funding
+            your brand deserves with our proprietary Capital Pitch Decks that
+            have successfully secured over $5 billion for our clients.
+          </p>
+          <ButtonLink href="/capital-raise-deck-audit" variant="link" className="mt-8 inline-block text-lg">
+            Let&rsquo;s promote your business next.
           </ButtonLink>
         </Container>
-      </Section>
+      </div>
+
+      {/* 4-step fading panels */}
+      <div className="grid md:grid-cols-4">
+        {raiseSteps.map((step) => (
+          <div key={step.title} className={`${step.bg} px-8 py-14 md:py-20`}>
+            <h4 className={`text-xl font-bold uppercase ${step.text}`}>
+              {step.title}
+            </h4>
+            <p className={`mt-3 text-sm leading-relaxed ${step.sub}`}>
+              {step.body}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Kicking Ass */}
+      <div className="bg-iron-gray-mid py-24 md:py-32">
+        <Container className="text-center">
+          <p className="text-lg font-bold uppercase text-white/90">
+            We&rsquo;re In Your Back Pocket,
+          </p>
+          <h2 className="balance mx-auto mt-2 max-w-4xl text-4xl font-bold uppercase leading-tight text-white md:text-6xl">
+            But We&rsquo;re Kicking Typical Branding Agency Ass
+          </h2>
+        </Container>
+      </div>
 
       {/* Free Pitch Deck Audit */}
-      <Section className="bg-iron-black">
-        <Container className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <Eyebrow>Free Pitch Deck Audit</Eyebrow>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-              * Limited to First 3 Qualified Companies per Week *
-            </p>
-            <h2 className="balance mt-3 text-3xl font-light text-white md:text-4xl">
-              Already have a pitch deck? Let us review it for you!
-            </h2>
-            <p className="mt-4 text-white/70">
-              If you qualify, our resident pitch deck team expert will
-              personally review your current pitch deck! Click below for an
-              account manager to determine if you qualify as one of our 3
-              reviews per week.
-            </p>
-            <ButtonLink href="/capital-raise-deck-audit" className="mt-6">
+      <div className="bg-iron-offwhite py-20 md:py-28">
+        <Container>
+          <h2 className="balance text-center text-5xl font-bold uppercase leading-tight text-iron-black md:text-7xl">
+            Free Pitch Deck Audit
+          </h2>
+          <p className="mt-4 text-center text-xs font-bold uppercase tracking-widest text-iron-black">
+            * Limited to First 3 Qualified Companies per Week *
+          </p>
+
+          <h3 className="mt-14 text-center text-2xl font-bold uppercase text-iron-black md:text-3xl">
+            Already have a pitch deck? Let us review it for you!
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-iron-body">
+            If you qualify, our resident pitch deck team expert will
+            personally review your current pitch deck! Click below for an
+            account manager to determine if you qualify as one of our 3
+            reviews per week.
+          </p>
+
+          <div className="mt-8 flex justify-center">
+            <ButtonLink href="/capital-raise-deck-audit">
               Let&rsquo;s Go!
             </ButtonLink>
           </div>
-          <GraphicPanel icon={Presentation} label="Pitch Deck Review" tone="black" />
         </Container>
-      </Section>
+      </div>
+
+      {/* Closing gradient CTA banner */}
+      <div className="bg-gradient-to-r from-iron-panel-mid to-iron-orange py-16">
+        <Container className="text-center">
+          <h2 className="balance text-4xl font-bold uppercase text-white md:text-5xl">
+            <FileText className="mx-auto mb-4 h-10 w-10" strokeWidth={1.5} />
+            Get Your Exclusive Content
+          </h2>
+          <p className="mt-3 text-white/80">
+            Click below to access and download the content you requested.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <ButtonLink href="/resources/resource-library" variant="solid">
+              Capital Raise Strategy
+            </ButtonLink>
+            <ButtonLink href="/resources/resource-library" variant="solid">
+              Branding Steps to Success
+            </ButtonLink>
+          </div>
+        </Container>
+      </div>
     </>
   );
 }

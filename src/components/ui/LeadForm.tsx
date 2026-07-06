@@ -36,7 +36,7 @@ export function LeadForm({
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-iron-orange/30 bg-iron-orange/5 p-6 text-iron-black">
+      <div className="border-2 border-iron-orange bg-iron-orange/5 p-6 text-iron-black">
         <p className="font-bold">Thanks — we&apos;ve got it.</p>
         <p className="mt-1 text-sm text-iron-body">
           A member of the Brand Iron team will follow up shortly.
@@ -69,7 +69,7 @@ export function LeadForm({
               id={field}
               name={field}
               rows={4}
-              className="w-full rounded-lg border border-iron-line px-4 py-3 text-sm outline-none focus:border-iron-orange"
+              className="w-full border border-iron-line px-4 py-3 text-sm outline-none focus:border-iron-orange"
             />
           ) : (
             <input
@@ -77,7 +77,7 @@ export function LeadForm({
               name={field}
               type={field === "email" ? "email" : "text"}
               required={field === "name" || field === "email"}
-              className="w-full rounded-lg border border-iron-line px-4 py-3 text-sm outline-none focus:border-iron-orange"
+              className="w-full border border-iron-line px-4 py-3 text-sm outline-none focus:border-iron-orange"
             />
           )}
         </div>

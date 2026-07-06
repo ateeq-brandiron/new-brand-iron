@@ -17,12 +17,12 @@ export function LinkCard({
     <Link
       href={href}
       className={clsx(
-        "group flex flex-col justify-between rounded-2xl border border-iron-line bg-white p-6 transition-all hover:-translate-y-1 hover:border-iron-orange hover:shadow-lg",
+        "group flex flex-col justify-between border-t-4 border-iron-black bg-white p-6 transition-colors hover:border-iron-orange",
         className
       )}
     >
       <div>
-        <h3 className="text-xl font-bold text-iron-black">{title}</h3>
+        <h3 className="text-lg font-bold uppercase text-iron-black">{title}</h3>
         {description ? (
           <p className="mt-2 text-sm leading-relaxed text-iron-body">
             {description}
