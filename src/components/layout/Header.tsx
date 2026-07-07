@@ -38,8 +38,8 @@ export function Header() {
       )}
     >
       <Container className="flex h-20 items-center justify-between gap-6">
-        <Link href="/" className={transparent ? "text-white" : "text-iron-black"}>
-          <Logo />
+        <Link href="/">
+          <Logo invert={!transparent} />
         </Link>
 
         <nav className="hidden items-center lg:flex">

@@ -1,41 +1,26 @@
+import Image from "next/image";
 import clsx from "clsx";
 
-// Stands in for the real Brand Iron mark (a circular badge with a "B" cut
-// into it, like a branding iron stamp) until the client supplies the
-// original logo files.
-export function LogoMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      className={clsx("shrink-0", className)}
-      aria-hidden
-    >
-      <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" strokeWidth="3" />
-      <path
-        d="M18 13h9a6 6 0 0 1 2 11.6A6.5 6.5 0 0 1 27 37h-9V13z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-      <path d="M18 24.5h8" stroke="currentColor" strokeWidth="3" />
-    </svg>
-  );
-}
-
+// Real Brand Iron lockup (circular "B" branding-iron mark + wordmark),
+// exported as a white-on-transparent PNG. Pass invert on light backgrounds
+// to flip it to dark ink.
 export function Logo({
   className,
-  markClassName,
+  invert = false,
 }: {
   className?: string;
-  markClassName?: string;
+  invert?: boolean;
 }) {
   return (
-    <span className={clsx("flex items-center gap-2.5", className)}>
-      <LogoMark className={clsx("h-9 w-9", markClassName)} />
-      <span className="font-sans text-xl font-black italic leading-none tracking-tight">
-        BRAND IRON
-      </span>
+    <span className={clsx("inline-flex h-9 w-[130px] items-center", className)}>
+      <Image
+        src="/images/Logo.png"
+        alt="Brand Iron"
+        width={270}
+        height={56}
+        priority
+        className={clsx("h-full w-auto object-contain", invert && "invert")}
+      />
     </span>
   );
 }

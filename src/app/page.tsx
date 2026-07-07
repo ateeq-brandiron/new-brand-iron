@@ -1,6 +1,5 @@
+import Image from "next/image";
 import {
-  Award,
-  Building2,
   CheckCircle2,
   FileText,
   Lightbulb,
@@ -15,9 +14,9 @@ import {
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { GraphicPanel } from "@/components/ui/GraphicPanel";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { CircleTextBadge } from "@/components/ui/CircleTextBadge";
+import { HeroBackground } from "@/components/sections/HeroBackground";
 
 const tickerServices = [
   "Automation",
@@ -29,9 +28,9 @@ const tickerServices = [
 ];
 
 const stats = [
-  { icon: Award, value: "$5", suffix: " Billion", label: "Raised" },
-  { icon: Building2, value: "200+", suffix: " Companies", label: "Branded/Rebranded" },
-  { icon: Presentation, value: "500+", suffix: " Pitch Decks", label: "Created" },
+  { icon: "/images/Stack-Icon.png", value: "$5", suffix: " Billion", label: "Raised" },
+  { icon: "/images/Building-Icon.png", value: "200+", suffix: " Companies", label: "Branded/Rebranded" },
+  { icon: "/images/Chart-Icon.png", value: "500+", suffix: " Pitch Decks", label: "Created" },
 ];
 
 const processRow1 = [
@@ -85,6 +84,7 @@ const forgeColumns = [
   {
     title: "Rebuild",
     subtitle: "Your Brand",
+    image: "/images/Rebuild.jpg",
     body: "We forge strong and credible brands while giving you the tools needed to raise capital and market your new venture.",
     items: [
       {
@@ -100,6 +100,7 @@ const forgeColumns = [
   {
     title: "Redefine",
     subtitle: "Your Marketing Strategies",
+    image: "/images/Redefine.jpg",
     body: "We customize, launch, and manage your effective marketing strategy.",
     items: [
       {
@@ -220,11 +221,20 @@ export default function Home() {
   return (
     <>
       {/* Full-bleed photo-style hero */}
-      <div className="relative flex min-h-[90vh] flex-col justify-center overflow-hidden bg-gradient-to-br from-iron-dusk-1 via-iron-leather-dark to-iron-dusk-2">
-        <div className="absolute inset-0 bg-black/20" />
+      <div className="relative flex min-h-[90vh] flex-col justify-center overflow-hidden">
+        <HeroBackground />
+        <div className="absolute inset-0 bg-black/25" />
         <Container className="relative z-10 text-center">
-          <h1 className="balance text-shadow-heavy text-5xl text-white md:text-7xl">
-            Outlaws <span className="text-3xl align-middle md:text-4xl">of</span> Ordinary
+          <h1 className="balance text-shadow-heavy inline-flex flex-wrap items-center justify-center gap-x-3 text-5xl text-white md:text-7xl">
+            Outlaws
+            <Image
+              src="/images/of.svg"
+              alt="of"
+              width={42}
+              height={52}
+              className="h-[0.6em] w-auto"
+            />
+            Ordinary
           </h1>
           <p className="text-shadow-heavy mt-4 text-lg font-bold uppercase tracking-widest text-white md:text-xl">
             Forging Unique Brands in Unique Ways
@@ -247,8 +257,13 @@ export default function Home() {
       {/* Make your mark */}
       <div className="py-16 md:py-24">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-full bg-gradient-to-br from-iron-dusk-1 to-iron-orange">
-            <span className="font-heading text-8xl text-white/90">B</span>
+          <div className="relative mx-auto aspect-square w-full max-w-sm">
+            <Image
+              src="/images/BI-Logo-Mask-1-e1723263913795.png"
+              alt="Brand Iron"
+              fill
+              className="object-contain"
+            />
           </div>
 
           <div>
@@ -272,7 +287,7 @@ export default function Home() {
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-iron-line pt-8">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex items-start gap-3">
-                  <IconBadge icon={stat.icon} size="sm" />
+                  <Image src={stat.icon} alt="" width={56} height={56} className="h-14 w-14 shrink-0" />
                   <div>
                     <p className="text-lg font-black leading-none text-iron-black">
                       {stat.value}
@@ -301,12 +316,24 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <GraphicPanel icon={Target} label="Brand Discovery" className="rounded-2xl" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+              <Image
+                src="/images/BIRepresentationImage1Scale.jpeg"
+                alt="Brand Iron performance dashboard"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
 
           <div className="grid items-center gap-10 md:grid-cols-2">
-            <div className="order-2 md:order-1">
-              <GraphicPanel icon={Rocket} label="Go-To-Market Deployment" className="rounded-2xl" />
+            <div className="relative order-2 aspect-[4/3] w-full overflow-hidden rounded-2xl md:order-1">
+              <Image
+                src="/images/Redefine.jpg"
+                alt="Brand Iron strategy session"
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="order-1 space-y-10 md:order-2">
               {processRow2.map((step) => (
@@ -362,11 +389,13 @@ export default function Home() {
       </div>
 
       {/* You're the competition — photo-split with overlapping card */}
-      <div className="relative">
-        <div className="grid h-[26rem] md:grid-cols-2">
-          <div className="bg-gradient-to-br from-iron-forest-1 to-iron-dusk-1" />
-          <div className="bg-gradient-to-bl from-iron-dusk-2 to-iron-leather" />
-        </div>
+      <div className="relative h-[26rem]">
+        <Image
+          src="/images/You-are-the-competition-bg-png.png"
+          alt=""
+          fill
+          className="object-cover"
+        />
         <Container className="absolute inset-0 flex items-center justify-center">
           <div className="relative max-w-xl border border-iron-line bg-white p-8 shadow-xl md:p-10">
             <span className="absolute -top-3 -right-3 h-6 w-6 border-r-2 border-t-2 border-iron-orange" />
@@ -390,8 +419,14 @@ export default function Home() {
       </div>
 
       {/* Idea + Brand Iron = Success equation */}
-      <div className="py-16 md:py-24">
-        <Container>
+      <div className="relative overflow-hidden py-16 md:py-24">
+        <Image
+          src="/images/Mountains-bg.svg"
+          alt=""
+          fill
+          className="object-cover object-top opacity-[0.06]"
+        />
+        <Container className="relative z-10">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             <CircleTextBadge icon={Lightbulb} label="YOUR IDEA" />
             <span className="text-3xl font-bold text-iron-orange">+</span>
@@ -435,7 +470,17 @@ export default function Home() {
 
           <div className="mt-16 grid gap-8 lg:grid-cols-2">
             {forgeColumns.map((col) => (
-              <div key={col.title} className="rounded-2xl bg-white p-8 shadow-lg md:p-10">
+              <div
+                key={col.title}
+                className="relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg md:p-10"
+              >
+                <Image
+                  src={col.image}
+                  alt=""
+                  fill
+                  className="object-cover opacity-[0.07]"
+                />
+                <div className="relative z-10">
                 <h3 className="text-4xl text-iron-black">{col.title}</h3>
                 <p className="mt-1 text-lg font-semibold text-iron-body">
                   {col.subtitle}
@@ -453,6 +498,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -460,7 +506,13 @@ export default function Home() {
       </div>
 
       {/* If Grit & Gumption — photo banner */}
-      <div className="relative flex h-72 items-center justify-center overflow-hidden bg-gradient-to-r from-iron-dusk-1 via-iron-leather to-iron-dusk-2">
+      <div className="relative flex h-72 items-center justify-center overflow-hidden">
+        <Image
+          src="/images/Grit-and-Gumption-Banner.png"
+          alt=""
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/10" />
         <Container className="relative z-10 text-center">
           <h2 className="text-shadow-heavy text-4xl text-white md:text-5xl">
@@ -473,8 +525,14 @@ export default function Home() {
       </div>
 
       {/* Grit cards + capital raise statement */}
-      <div className="bg-iron-tan pb-20 pt-16 md:pb-28">
-        <Container>
+      <div className="relative overflow-hidden bg-iron-tan pb-20 pt-16 md:pb-28">
+        <Image
+          src="/images/Dark-Mountains.png"
+          alt=""
+          fill
+          className="object-cover object-bottom opacity-10"
+        />
+        <Container className="relative z-10">
           <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-5">
             {gritCards.map((card) => (
               <div key={card.title} className="rounded-lg bg-white p-6 shadow-sm">
@@ -531,7 +589,14 @@ export default function Home() {
       </div>
 
       {/* Kicking Ass — photo banner */}
-      <div className="relative flex h-80 items-center justify-center overflow-hidden bg-gradient-to-b from-iron-forest-1 to-black">
+      <div className="relative flex h-80 items-center justify-center overflow-hidden">
+        <Image
+          src="/images/shutterstock_2152267487-1.jpg"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/45" />
         <Container className="relative z-10 text-center">
           <p className="text-shadow-heavy text-lg font-bold uppercase text-white/90">
             We&rsquo;re In Your Back Pocket,
@@ -569,14 +634,21 @@ export default function Home() {
           </div>
 
           {/* Get Your Exclusive Content */}
-          <div className="relative mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl bg-gradient-to-br from-iron-dusk-1 to-iron-leather-dark px-8 py-16 text-center">
-            <h2 className="balance text-shadow-heavy text-3xl text-white md:text-4xl">
+          <div className="relative mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl px-8 py-16 text-center">
+            <Image
+              src="/images/shutterstock_2489980613-scaled.jpg"
+              alt=""
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50" />
+            <h2 className="relative z-10 balance text-shadow-heavy text-3xl text-white md:text-4xl">
               Get Your Exclusive Content
             </h2>
-            <p className="text-shadow-heavy mt-3 text-white/90">
+            <p className="relative z-10 text-shadow-heavy mt-3 text-white/90">
               Click below to access and download the content you requested.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-4">
               <ButtonLink href="/resources/resource-library" variant="solid" className="rounded-full">
                 Capital Raise Strategy
               </ButtonLink>

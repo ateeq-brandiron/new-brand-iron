@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Container } from "../ui/Container";
 import { footerNav, siteConfig } from "@/lib/site-config";
 import { NewsletterForm } from "./NewsletterForm";
-import { LogoMark } from "../ui/Logo";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -22,21 +22,26 @@ export function Footer() {
 
       <div className="grid md:grid-cols-2">
         {/* Leather panel */}
-        <div className="flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-iron-leather to-iron-leather-dark px-8 py-16 text-center">
-          <LogoMark className="h-20 w-20 text-white/90" />
-          <div>
-            <p className="text-2xl font-black italic tracking-tight">
-              BRAND IRON
-            </p>
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-white/70">
-              Marketing
-            </p>
-          </div>
+        <div className="relative min-h-72">
+          <Image
+            src="/images/BI-Footer-Logo.jpeg"
+            alt="Brand Iron"
+            fill
+            className="object-cover"
+          />
         </div>
 
         {/* Forest panel */}
-        <div className="bg-gradient-to-br from-iron-forest-1 to-iron-forest-2 px-8 py-14">
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+        <div className="relative overflow-hidden px-8 py-14">
+          <Image
+            src="/images/Mountains-Shutterstock-Img.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-iron-forest-1/80" />
+          <div className="relative z-10">
+            <nav className="flex flex-wrap gap-x-6 gap-y-2">
             {footerNav.map((item) => (
               <Link
                 key={item.href}
@@ -100,6 +105,7 @@ export function Footer() {
                 </li>
               </ul>
             </div>
+          </div>
           </div>
         </div>
       </div>
