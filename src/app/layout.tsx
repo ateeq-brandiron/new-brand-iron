@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Barlow, Open_Sans } from "next/font/google";
+import { Rye, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site-config";
 
-const heading = Barlow({
+const heading = Rye({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "400",
 });
 
 const body = Open_Sans({

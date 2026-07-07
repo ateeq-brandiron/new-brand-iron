@@ -1,21 +1,37 @@
 import {
+  Award,
+  Building2,
+  CheckCircle2,
   FileText,
-  LayoutGrid,
+  Lightbulb,
+  MessageSquare,
   MonitorSmartphone,
   Palette,
   Presentation,
   Rocket,
+  ShieldCheck,
   Target,
   TrendingUp,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { GraphicPanel } from "@/components/ui/GraphicPanel";
+import { IconBadge } from "@/components/ui/IconBadge";
+import { CircleTextBadge } from "@/components/ui/CircleTextBadge";
+
+const tickerServices = [
+  "Automation",
+  "Branding",
+  "Capital Raise Deck",
+  "GTM Strategy",
+  "Investor Outreach Campaign",
+  "Website Development",
+];
 
 const stats = [
-  { value: "$5", suffix: " Billion", label: "Raised" },
-  { value: "200+", suffix: " Companies", label: "Branded/Rebranded" },
-  { value: "500+", suffix: " Pitch Decks", label: "Created" },
+  { icon: Award, value: "$5", suffix: " Billion", label: "Raised" },
+  { icon: Building2, value: "200+", suffix: " Companies", label: "Branded/Rebranded" },
+  { icon: Presentation, value: "500+", suffix: " Pitch Decks", label: "Created" },
 ];
 
 const processRow1 = [
@@ -53,16 +69,16 @@ const quickServices = [
     icon: MonitorSmartphone,
   },
   { title: "GTM Strategy", href: "/services/gtm-strategy", icon: TrendingUp },
-  { title: "All Services", href: "/services", icon: LayoutGrid },
+  { title: "All Services", href: "/services", icon: Rocket },
 ];
 
 const expertiseItems = [
-  { bold: "Define", rest: "And Develop Your Brand" },
-  { bold: "Craft", rest: "Your Message" },
-  { bold: "Build", rest: "And Deploy Your Marketing Strategy" },
-  { bold: "Design", rest: "Your Website" },
-  { bold: "Create", rest: "Your Pitch Deck" },
-  { bold: "Secure", rest: "Your Funding" },
+  { bold: "Define", rest: "And Develop Your Brand", icon: Target },
+  { bold: "Craft", rest: "Your Message", icon: MessageSquare },
+  { bold: "Build", rest: "And Deploy Your Marketing Strategy", icon: Rocket },
+  { bold: "Design", rest: "Your Website", icon: MonitorSmartphone },
+  { bold: "Create", rest: "Your Pitch Deck", icon: FileText },
+  { bold: "Secure", rest: "Your Funding", icon: ShieldCheck },
 ];
 
 const forgeColumns = [
@@ -160,40 +176,41 @@ const raiseSteps = [
   },
 ];
 
-function WatermarkHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="balance text-center text-4xl font-bold uppercase leading-tight text-iron-black/10 md:text-6xl">
-      {children}
-    </h2>
-  );
-}
-
-function ExpertiseItem({
-  bold,
+function RailItem({
+  title,
   rest,
+  icon: Icon,
   align,
 }: {
-  bold: string;
+  title: string;
   rest: string;
+  icon: typeof Target;
   align: "left" | "right";
 }) {
-  return (
-    <div className={align === "right" ? "md:text-right" : ""}>
-      <p className="text-xl font-bold text-iron-black md:text-2xl">
-        {bold} <span className="font-normal">{rest}</span>
-      </p>
-      <div
-        className={`mt-2 flex items-stretch gap-2 ${
-          align === "right" ? "flex-row-reverse" : ""
+  const content = (
+    <div
+      className={`flex flex-col items-center gap-3 md:flex-row ${
+        align === "right" ? "md:flex-row-reverse" : ""
+      }`}
+    >
+      <IconBadge icon={Icon} size="sm" />
+      <p
+        className={`text-center text-lg font-bold text-iron-black md:text-lg ${
+          align === "right" ? "md:text-left" : "md:text-right"
         }`}
       >
-        <span className="text-2xl font-bold leading-none text-iron-orange">
-          {align === "right" ? "]" : "["}
-        </span>
-        <div className="flex-1 space-y-1">
-          <div className="h-0.5 w-full bg-iron-orange" />
-          <div className="h-0.5 w-full bg-iron-orange" />
-        </div>
+        {title} <span className="font-normal">{rest}</span>
+      </p>
+    </div>
+  );
+
+  return (
+    <div className="md:grid md:grid-cols-2 md:gap-12">
+      <div className="flex justify-center md:justify-end">
+        {align === "left" ? content : null}
+      </div>
+      <div className="flex justify-center md:justify-start">
+        {align === "right" ? content : null}
       </div>
     </div>
   );
@@ -202,29 +219,46 @@ function ExpertiseItem({
 export default function Home() {
   return (
     <>
-      {/* Watermark tagline */}
-      <div className="overflow-hidden pt-16">
-        <Container>
-          <p className="balance text-center text-4xl font-bold uppercase leading-none text-iron-black/10 md:text-7xl">
-            Outlaws of Ordinary
-          </p>
-          <p className="mt-2 text-center text-sm font-bold uppercase tracking-[0.3em] text-iron-black/20">
+      {/* Full-bleed photo-style hero */}
+      <div className="relative flex min-h-[90vh] flex-col justify-center overflow-hidden bg-gradient-to-br from-iron-dusk-1 via-iron-leather-dark to-iron-dusk-2">
+        <div className="absolute inset-0 bg-black/20" />
+        <Container className="relative z-10 text-center">
+          <h1 className="balance text-shadow-heavy text-5xl text-white md:text-7xl">
+            Outlaws <span className="text-3xl align-middle md:text-4xl">of</span> Ordinary
+          </h1>
+          <p className="text-shadow-heavy mt-4 text-lg font-bold uppercase tracking-widest text-white md:text-xl">
             Forging Unique Brands in Unique Ways
           </p>
         </Container>
+        <div className="relative z-10 mt-16 border-t border-white/20 bg-black/30 py-5">
+          <Container className="flex flex-wrap justify-center gap-x-10 gap-y-2">
+            {tickerServices.map((service) => (
+              <span
+                key={service}
+                className="text-shadow-heavy text-sm font-bold uppercase tracking-wide text-white"
+              >
+                {service}
+              </span>
+            ))}
+          </Container>
+        </div>
       </div>
 
-      {/* Hero */}
-      <div className="py-12 md:py-16">
-        <Container>
-          <div className="ml-auto max-w-2xl">
+      {/* Make your mark */}
+      <div className="py-16 md:py-24">
+        <Container className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-full bg-gradient-to-br from-iron-dusk-1 to-iron-orange">
+            <span className="font-heading text-8xl text-white/90">B</span>
+          </div>
+
+          <div>
             <h3 className="text-lg font-bold uppercase text-iron-black">
               In the Wild West of marketing,
             </h3>
-            <h1 className="balance mt-2 text-5xl font-bold uppercase leading-[1.05] text-iron-black md:text-6xl">
+            <h2 className="balance mt-2 text-4xl text-iron-black md:text-5xl">
               Make your mark on the world
-            </h1>
-            <p className="mt-6 max-w-lg text-lg text-iron-body">
+            </h2>
+            <p className="mt-5 max-w-lg text-iron-body">
               Where brands, entrepreneurs, and businesses—from start-ups to
               large firms—achieve their desired outcomes.
             </p>
@@ -235,51 +269,49 @@ export default function Home() {
               </ButtonLink>
             </div>
 
-            <dl className="mt-14 grid grid-cols-3 gap-6 border-t border-iron-line pt-8">
+            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-iron-line pt-8">
               {stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-2xl font-bold text-iron-black md:text-3xl">
-                    {stat.value}
-                    <span className="text-iron-orange">{stat.suffix}</span>
-                  </dd>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-iron-body">
-                    {stat.label}
-                  </p>
+                <div key={stat.label} className="flex items-start gap-3">
+                  <IconBadge icon={stat.icon} size="sm" />
+                  <div>
+                    <p className="text-lg font-black leading-none text-iron-black">
+                      {stat.value}
+                      <span className="text-iron-orange">{stat.suffix}</span>
+                    </p>
+                    <p className="mt-1 text-xs font-semibold text-iron-body">
+                      {stat.label}
+                    </p>
+                  </div>
                 </div>
               ))}
-            </dl>
+            </div>
           </div>
         </Container>
       </div>
 
       {/* Process: zigzag rows */}
-      <div className="py-16 md:py-24">
+      <div className="bg-iron-offwhite py-16 md:py-24">
         <Container className="space-y-16 md:space-y-24">
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="space-y-10">
               {processRow1.map((step) => (
                 <div key={step.title}>
-                  <h3 className="text-3xl font-bold uppercase text-iron-black">
-                    {step.title}
-                  </h3>
+                  <h3 className="text-3xl text-iron-black">{step.title}</h3>
                   <p className="mt-3 text-iron-body">{step.body}</p>
                 </div>
               ))}
             </div>
-            <GraphicPanel icon={Target} label="Brand Discovery" />
+            <GraphicPanel icon={Target} label="Brand Discovery" className="rounded-2xl" />
           </div>
 
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="order-2 md:order-1">
-              <GraphicPanel icon={Rocket} label="Go-To-Market Deployment" />
+              <GraphicPanel icon={Rocket} label="Go-To-Market Deployment" className="rounded-2xl" />
             </div>
             <div className="order-1 space-y-10 md:order-2">
               {processRow2.map((step) => (
                 <div key={step.title}>
-                  <h3 className="text-3xl font-bold uppercase text-iron-black">
-                    {step.title}
-                  </h3>
+                  <h3 className="text-3xl text-iron-black">{step.title}</h3>
                   <p className="mt-3 text-iron-body">{step.body}</p>
                 </div>
               ))}
@@ -287,9 +319,7 @@ export default function Home() {
           </div>
 
           <div className="max-w-3xl">
-            <h3 className="text-3xl font-bold uppercase text-iron-black">
-              Determine
-            </h3>
+            <h3 className="text-3xl text-iron-black">Determine</h3>
             <p className="mt-3 text-iron-body">
               the next steps toward your profitable outcome handled entirely
               by our Business Development team or in tandem with your account
@@ -303,7 +333,7 @@ export default function Home() {
       </div>
 
       {/* Quick service links */}
-      <div className="border-y border-iron-line py-14">
+      <div className="py-14">
         <Container>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
             {quickServices.map((service) => (
@@ -312,10 +342,7 @@ export default function Home() {
                 href={service.href}
                 className="group flex flex-col items-center gap-3 text-center"
               >
-                <service.icon
-                  className="h-9 w-9 text-iron-black group-hover:text-iron-orange"
-                  strokeWidth={1.5}
-                />
+                <IconBadge icon={service.icon} size="sm" className="transition-transform group-hover:scale-105" />
                 <span className="text-sm font-bold uppercase tracking-wide text-iron-orange">
                   {service.title}
                 </span>
@@ -325,21 +352,32 @@ export default function Home() {
         </Container>
       </div>
 
-      {/* Brand Iron gets you there / competition */}
-      <div className="py-20 md:py-28">
+      {/* Brand Iron gets you there */}
+      <div className="py-16 md:py-20">
         <Container>
-          <h2 className="balance mx-auto max-w-4xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+          <h2 className="balance text-center text-4xl text-iron-black md:text-6xl">
             Brand Iron gets you there.
           </h2>
+        </Container>
+      </div>
 
-          <div className="mt-16 max-w-2xl">
-            <p className="text-lg font-semibold text-iron-black">
+      {/* You're the competition — photo-split with overlapping card */}
+      <div className="relative">
+        <div className="grid h-[26rem] md:grid-cols-2">
+          <div className="bg-gradient-to-br from-iron-forest-1 to-iron-dusk-1" />
+          <div className="bg-gradient-to-bl from-iron-dusk-2 to-iron-leather" />
+        </div>
+        <Container className="absolute inset-0 flex items-center justify-center">
+          <div className="relative max-w-xl border border-iron-line bg-white p-8 shadow-xl md:p-10">
+            <span className="absolute -top-3 -right-3 h-6 w-6 border-r-2 border-t-2 border-iron-orange" />
+            <span className="absolute -bottom-3 -left-3 h-6 w-6 border-b-2 border-l-2 border-iron-orange" />
+            <p className="font-semibold text-iron-black">
               With our experts on your team,
             </p>
-            <h3 className="mt-1 text-3xl font-bold uppercase text-iron-black md:text-4xl">
+            <h3 className="mt-1 text-3xl text-iron-black md:text-4xl">
               You&rsquo;re the competition.
             </h3>
-            <p className="mt-5 text-iron-body">
+            <p className="mt-4 text-iron-body">
               Branding requires the right elements for success. Our proven
               brand-building, messaging methodology, and marketing
               implementation ensures your business achieves your goals and
@@ -351,44 +389,54 @@ export default function Home() {
         </Container>
       </div>
 
-      {/* Use Brand Iron's expertise to */}
+      {/* Idea + Brand Iron = Success equation */}
       <div className="py-16 md:py-24">
         <Container>
-          <h2 className="balance mx-auto max-w-3xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            <CircleTextBadge icon={Lightbulb} label="YOUR IDEA" />
+            <span className="text-3xl font-bold text-iron-orange">+</span>
+            <CircleTextBadge icon={Target} label="BRAND IRON" />
+            <span className="text-3xl font-bold text-iron-orange">&gt;</span>
+            <CircleTextBadge icon={CheckCircle2} label="SUCCESS!" />
+          </div>
+
+          <h2 className="balance mt-16 text-center text-3xl text-iron-black md:text-5xl">
             Use Brand Iron&rsquo;s expertise to:
           </h2>
 
-          <div className="mt-20 grid gap-x-12 gap-y-16 md:grid-cols-2">
+          <div className="relative mt-16 space-y-12">
+            <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-iron-orange/40 md:block" />
             {expertiseItems.map((item, i) => (
-              <div key={item.bold} className={i % 2 === 1 ? "md:mt-16" : ""}>
-                <ExpertiseItem
-                  bold={item.bold}
-                  rest={item.rest}
-                  align={i % 2 === 1 ? "right" : "left"}
-                />
-              </div>
+              <RailItem
+                key={item.bold}
+                title={item.bold}
+                rest={item.rest}
+                icon={item.icon}
+                align={i % 2 === 0 ? "left" : "right"}
+              />
             ))}
           </div>
 
-          <p className="mt-16 text-center text-2xl font-bold text-iron-black">
-            Maximize <span className="font-normal">Your Results</span>
-          </p>
+          <div className="mt-12 flex flex-col items-center gap-3">
+            <IconBadge icon={TrendingUp} size="lg" />
+            <p className="text-lg font-bold text-iron-black">
+              Maximize <span className="font-normal">Your Results</span>
+            </p>
+          </div>
         </Container>
       </div>
 
       {/* Forge your next phase */}
       <div className="bg-iron-tan py-20 md:py-28">
         <Container>
-          <h2 className="balance mx-auto max-w-4xl text-center text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
+          <h2 className="balance mx-auto max-w-4xl text-center text-4xl text-iron-black md:text-6xl">
             Forge your next phase of success with Brand Iron
           </h2>
 
           <div className="mt-16 grid gap-8 lg:grid-cols-2">
             {forgeColumns.map((col) => (
-              <div key={col.title} className="bg-white p-8 md:p-10">
-                <h3 className="text-4xl font-bold uppercase text-iron-black">
-                  {col.title}
-                </h3>
+              <div key={col.title} className="rounded-2xl bg-white p-8 shadow-lg md:p-10">
+                <h3 className="text-4xl text-iron-black">{col.title}</h3>
                 <p className="mt-1 text-lg font-semibold text-iron-body">
                   {col.subtitle}
                 </p>
@@ -411,15 +459,25 @@ export default function Home() {
         </Container>
       </div>
 
-      {/* If Grit & Gumption watermark divider + grit cards */}
-      <div className="bg-iron-tan pb-20 pt-4 md:pb-28">
-        <Container>
-          <WatermarkHeading>
+      {/* If Grit & Gumption — photo banner */}
+      <div className="relative flex h-72 items-center justify-center overflow-hidden bg-gradient-to-r from-iron-dusk-1 via-iron-leather to-iron-dusk-2">
+        <div className="absolute inset-0 bg-black/10" />
+        <Container className="relative z-10 text-center">
+          <h2 className="text-shadow-heavy text-4xl text-white md:text-5xl">
+            Brand Iron
+          </h2>
+          <p className="text-shadow-heavy mt-2 text-lg font-bold uppercase tracking-wide text-white md:text-2xl">
             If Grit &amp; Gumption Were a Branding Agency
-          </WatermarkHeading>
-          <div className="mt-16 grid gap-10 md:grid-cols-3 lg:grid-cols-5">
+          </p>
+        </Container>
+      </div>
+
+      {/* Grit cards + capital raise statement */}
+      <div className="bg-iron-tan pb-20 pt-16 md:pb-28">
+        <Container>
+          <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-5">
             {gritCards.map((card) => (
-              <div key={card.title}>
+              <div key={card.title} className="rounded-lg bg-white p-6 shadow-sm">
                 <h3 className="font-bold uppercase text-iron-black">
                   {card.title}
                 </h3>
@@ -429,25 +487,22 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </Container>
-      </div>
 
-      {/* Capital raise statement (still tan) */}
-      <div className="bg-iron-tan pb-20 pt-4 md:pb-28">
-        <Container className="text-center">
-          <h2 className="balance mx-auto max-w-4xl text-4xl font-bold uppercase leading-tight text-iron-black md:text-6xl">
-            We&rsquo;ve helped our clients raise over $5 Billion
-          </h2>
-          <p className="mt-4 text-lg font-bold uppercase text-iron-black/70">
-            — and we&rsquo;re confident we can help you raise capital, too.
-          </p>
+          <div className="mt-20 text-center">
+            <h2 className="balance mx-auto max-w-4xl text-4xl text-white text-shadow-heavy md:text-6xl">
+              We&rsquo;ve helped our clients raise over $5 Billion
+            </h2>
+            <p className="text-shadow-heavy mt-4 text-lg font-bold uppercase text-white">
+              — and we&rsquo;re confident we can help you raise capital, too.
+            </p>
+          </div>
         </Container>
       </div>
 
       {/* Secure Investor Funding */}
       <div className="py-20 md:py-28">
         <Container className="text-center">
-          <h2 className="text-4xl font-bold uppercase text-iron-black md:text-6xl">
+          <h2 className="text-4xl text-iron-black md:text-6xl">
             Secure Investor Funding
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-iron-body">
@@ -475,13 +530,13 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Kicking Ass */}
-      <div className="bg-iron-gray-mid py-24 md:py-32">
-        <Container className="text-center">
-          <p className="text-lg font-bold uppercase text-white/90">
+      {/* Kicking Ass — photo banner */}
+      <div className="relative flex h-80 items-center justify-center overflow-hidden bg-gradient-to-b from-iron-forest-1 to-black">
+        <Container className="relative z-10 text-center">
+          <p className="text-shadow-heavy text-lg font-bold uppercase text-white/90">
             We&rsquo;re In Your Back Pocket,
           </p>
-          <h2 className="balance mx-auto mt-2 max-w-4xl text-4xl font-bold uppercase leading-tight text-white md:text-6xl">
+          <h2 className="balance text-shadow-heavy mx-auto mt-2 max-w-4xl text-4xl text-white md:text-6xl">
             But We&rsquo;re Kicking Typical Branding Agency Ass
           </h2>
         </Container>
@@ -490,14 +545,14 @@ export default function Home() {
       {/* Free Pitch Deck Audit */}
       <div className="bg-iron-offwhite py-20 md:py-28">
         <Container>
-          <h2 className="balance text-center text-5xl font-bold uppercase leading-tight text-iron-black md:text-7xl">
+          <h2 className="balance text-center text-5xl text-iron-black md:text-7xl">
             Free Pitch Deck Audit
           </h2>
           <p className="mt-4 text-center text-xs font-bold uppercase tracking-widest text-iron-black">
             * Limited to First 3 Qualified Companies per Week *
           </p>
 
-          <h3 className="mt-14 text-center text-2xl font-bold uppercase text-iron-black md:text-3xl">
+          <h3 className="mt-14 text-center text-2xl text-iron-black md:text-3xl">
             Already have a pitch deck? Let us review it for you!
           </h3>
           <p className="mx-auto mt-4 max-w-2xl text-center text-iron-body">
@@ -512,26 +567,23 @@ export default function Home() {
               Let&rsquo;s Go!
             </ButtonLink>
           </div>
-        </Container>
-      </div>
 
-      {/* Closing gradient CTA banner */}
-      <div className="bg-gradient-to-r from-iron-panel-mid to-iron-orange py-16">
-        <Container className="text-center">
-          <h2 className="balance text-4xl font-bold uppercase text-white md:text-5xl">
-            <FileText className="mx-auto mb-4 h-10 w-10" strokeWidth={1.5} />
-            Get Your Exclusive Content
-          </h2>
-          <p className="mt-3 text-white/80">
-            Click below to access and download the content you requested.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <ButtonLink href="/resources/resource-library" variant="solid">
-              Capital Raise Strategy
-            </ButtonLink>
-            <ButtonLink href="/resources/resource-library" variant="solid">
-              Branding Steps to Success
-            </ButtonLink>
+          {/* Get Your Exclusive Content */}
+          <div className="relative mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl bg-gradient-to-br from-iron-dusk-1 to-iron-leather-dark px-8 py-16 text-center">
+            <h2 className="balance text-shadow-heavy text-3xl text-white md:text-4xl">
+              Get Your Exclusive Content
+            </h2>
+            <p className="text-shadow-heavy mt-3 text-white/90">
+              Click below to access and download the content you requested.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <ButtonLink href="/resources/resource-library" variant="solid" className="rounded-full">
+                Capital Raise Strategy
+              </ButtonLink>
+              <ButtonLink href="/resources/resource-library" variant="solid" className="rounded-full">
+                Branding Steps to Success
+              </ButtonLink>
+            </div>
           </div>
         </Container>
       </div>

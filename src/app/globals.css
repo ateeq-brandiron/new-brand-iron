@@ -20,6 +20,17 @@
   --color-iron-panel-mid: #676767;
   --color-iron-panel-light: #afb2b3;
   --color-iron-panel-pale: #e9e9e9;
+
+  /* Stand-ins for the site's photography (sunset ranch, forge, forest,
+     leather) until real brand photography is supplied */
+  --color-iron-dusk-1: #1c2541;
+  --color-iron-dusk-2: #d97b3f;
+  --color-iron-forge-1: #1a0f0a;
+  --color-iron-forge-2: #ff8a1e;
+  --color-iron-forest-1: #10201a;
+  --color-iron-forest-2: #2f4a3c;
+  --color-iron-leather: #7a3b18;
+  --color-iron-leather-dark: #4f2410;
 }
 
 @theme inline {
@@ -42,6 +53,15 @@
   --color-iron-panel-mid: var(--color-iron-panel-mid);
   --color-iron-panel-light: var(--color-iron-panel-light);
   --color-iron-panel-pale: var(--color-iron-panel-pale);
+
+  --color-iron-dusk-1: var(--color-iron-dusk-1);
+  --color-iron-dusk-2: var(--color-iron-dusk-2);
+  --color-iron-forge-1: var(--color-iron-forge-1);
+  --color-iron-forge-2: var(--color-iron-forge-2);
+  --color-iron-forest-1: var(--color-iron-forest-1);
+  --color-iron-forest-2: var(--color-iron-forest-2);
+  --color-iron-leather: var(--color-iron-leather);
+  --color-iron-leather-dark: var(--color-iron-leather-dark);
 }
 
 body {
@@ -57,11 +77,15 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading), var(--font-body), sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
 }
 
 .balance {
   text-wrap: balance;
+}
+
+.text-shadow-heavy {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }

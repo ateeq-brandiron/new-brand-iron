@@ -1,36 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import clsx from "clsx";
 import { Container } from "../ui/Container";
 import { ButtonLink } from "../ui/Button";
+import { Logo } from "../ui/Logo";
 import { mainNav, siteConfig } from "@/lib/site-config";
 
 export function Header() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  const isHome = pathname === "/";
+  const transparent = isHome && !scrolled && !mobileOpen;
+
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const navItems = mainNav.filter((item) => item.label !== "Home");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-iron-line bg-white/95 backdrop-blur">
+    <header
+      className={clsx(
+        "z-50 w-full transition-colors duration-300",
+        isHome ? "absolute inset-x-0 top-0" : "sticky top-0",
+        transparent ? "bg-transparent" : "border-b border-iron-line bg-white/95 backdrop-blur"
+      )}
+    >
       <Container className="flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="shrink-0 text-2xl font-black tracking-tight text-iron-black">
-          BRAND<span className="text-iron-orange">IRON</span>
+        <Link href="/" className={transparent ? "text-white" : "text-iron-black"}>
+          <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {mainNav
-            .filter((item) => item.label !== "Home")
-            .map((item) => (
+        <nav className="hidden items-center lg:flex">
+          {navItems.map((item, i) => (
+            <div key={item.href} className="flex items-center">
+              {i > 0 ? (
+                <span
+                  className={clsx(
+                    "mx-2 text-sm",
+                    transparent ? "text-white/40" : "text-iron-line"
+                  )}
+                >
+                  |
+                </span>
+              ) : null}
               <div
-                key={item.href}
                 className="group relative"
                 onMouseEnter={() => setOpenDropdown(item.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-3 py-2 text-sm font-bold uppercase tracking-wide text-iron-black hover:text-iron-orange"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 text-sm font-bold uppercase tracking-wide",
+                    transparent
+                      ? "text-white text-shadow-heavy hover:text-iron-orange"
+                      : "text-iron-black hover:text-iron-orange"
+                  )}
                 >
                   {item.label}
                   {item.children ? (
@@ -51,28 +88,40 @@ export function Header() {
                   </div>
                 ) : null}
               </div>
-            ))}
+            </div>
+          ))}
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
           <Link
             href="/portal"
-            className="text-sm font-semibold text-iron-body hover:text-iron-orange"
+            className={clsx(
+              "text-sm font-semibold",
+              transparent ? "text-white/80 text-shadow-heavy hover:text-white" : "text-iron-body hover:text-iron-orange"
+            )}
           >
             Client Portal
           </Link>
           <a
             href={siteConfig.phoneHref}
-            className="flex items-center gap-2 text-sm font-bold text-iron-black hover:text-iron-orange"
+            className={clsx(
+              "flex items-center gap-2 text-sm font-bold",
+              transparent ? "text-white text-shadow-heavy" : "text-iron-black hover:text-iron-orange"
+            )}
           >
             <Phone className="h-4 w-4" />
             {siteConfig.phone}
           </a>
-          <ButtonLink href="/contact">Book a Call</ButtonLink>
+          <ButtonLink
+            href="/contact"
+            variant={transparent ? "inverse" : "primary"}
+          >
+            Book a Call
+          </ButtonLink>
         </div>
 
         <button
-          className="rounded-md p-2 text-iron-black lg:hidden"
+          className={clsx("p-2 lg:hidden", transparent ? "text-white" : "text-iron-black")}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -87,7 +136,7 @@ export function Header() {
               <div key={item.href}>
                 <Link
                   href={item.href}
-                  className="block rounded-md px-2 py-2 font-semibold text-iron-black"
+                  className="block px-2 py-2 font-bold uppercase text-iron-black"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -98,7 +147,7 @@ export function Header() {
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-md px-2 py-1.5 text-sm text-iron-body"
+                        className="block px-2 py-1.5 text-sm text-iron-body"
                         onClick={() => setMobileOpen(false)}
                       >
                         {child.label}
@@ -110,7 +159,7 @@ export function Header() {
             ))}
             <Link
               href="/portal"
-              className="block rounded-md px-2 py-2 font-semibold text-iron-body"
+              className="block px-2 py-2 font-semibold text-iron-body"
               onClick={() => setMobileOpen(false)}
             >
               Client Portal
